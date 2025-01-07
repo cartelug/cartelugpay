@@ -154,19 +154,19 @@
     <div id="netflix" class="service-section">
       <h3>Choose Your Netflix Plan</h3>
       <div class="plans">
-        <div class="plan" onclick="makePayment('Netflix', 2, 45,000)">
+        <div class="plan" onclick="makePayment('Netflix', 2, 45000)">
           <h3>2 Months</h3>
           <div class="price">45,000 UGX</div>
         </div>
-        <div class="plan" onclick="makePayment('Netflix', 3, 60,000)">
+        <div class="plan" onclick="makePayment('Netflix', 3, 60000)">
           <h3>3 Months</h3>
           <div class="price">60,000 UGX</div>
         </div>
-        <div class="plan" onclick="makePayment('Netflix', 6, 120,000)">
+        <div class="plan" onclick="makePayment('Netflix', 6, 120000)">
           <h3>6 Months</h3>
           <div class="price">120,000 UGX</div>
         </div>
-        <div class="plan" onclick="makePayment('Netflix', 12, 240,000)">
+        <div class="plan" onclick="makePayment('Netflix', 12, 240000)">
           <h3>1 Year</h3>
           <div class="price">240,000 UGX</div>
         </div>
@@ -175,15 +175,15 @@
     <div id="spotify" class="service-section">
       <h3>Choose Your Spotify Plan</h3>
       <div class="plans">
-        <div class="plan" onclick="makePayment('Spotify', 3, 30,000)">
+        <div class="plan" onclick="makePayment('Spotify', 3, 30000)">
           <h3>3 Months</h3>
           <div class="price">30,000 UGX</div>
         </div>
-        <div class="plan" onclick="makePayment('Spotify', 6, 60,000)">
+        <div class="plan" onclick="makePayment('Spotify', 6, 60000)">
           <h3>6 Months</h3>
           <div class="price">60,000 UGX</div>
         </div>
-        <div class="plan" onclick="makePayment('Spotify', 12, 120,000)">
+        <div class="plan" onclick="makePayment('Spotify', 12, 120000)">
           <h3>1 Year</h3>
           <div class="price">120,000 UGX</div>
         </div>
@@ -193,6 +193,7 @@
   <div class="footer">
     <p>All payments here use Mobile Money (MTN & Airtel).</p>
   </div>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
   <script>
     function showPlans(service) {
       document.querySelectorAll('.service-section').forEach(section => section.classList.remove('active'));
@@ -225,7 +226,6 @@
         amount: amount,
         currency: "UGX",
         payment_options: "mobilemoneyuganda",
-        redirect_url: "https://wa.link/4s3yih",
         customer: {
           email: email,
           phonenumber: phoneNumber,
@@ -233,7 +233,8 @@
         },
         customizations: {
           title: `${service} Subscription`,
-          description: `Payment for ${service} - ${months} months`
+          description: `Payment for ${service} - ${months} months`,
+          logo: "https://via.placeholder.com/150",
         },
         callback: function(response) {
           if (response.status === "successful") {
@@ -243,7 +244,7 @@
           }
         },
         onclose: function() {
-          console.log("Payment process closed.");
+          alert("Payment process was closed.");
         }
       });
     }
