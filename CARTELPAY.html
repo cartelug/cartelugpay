@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CartelUG | Seamless Payments</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>CartelUg | Seamless Payments</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -12,71 +12,75 @@
       padding: 0;
     }
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f3f4f6;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to bottom, #8e44ad, #f39c12);
+      color: #333;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      color: #333;
     }
     .container {
       max-width: 800px;
-      margin: 20px;
-      padding: 40px;
-      background-color: #ffffff;
+      width: 90%;
+      background-color: #fff;
       border-radius: 15px;
+      padding: 20px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     h1 {
+      color: #8e44ad;
       font-weight: 600;
-      color: #00A368;
       margin-bottom: 20px;
     }
     .service-section {
-      margin: 30px 0;
+      margin: 20px 0;
     }
     .service-title {
-      font-size: 22px;
-      color: #555;
+      font-size: 24px;
+      color: #333;
       margin-bottom: 15px;
       font-weight: 600;
     }
     .options {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
-      justify-content: center;
     }
     .option {
-      background: #f9fafb;
-      border: 2px solid #e5e7eb;
+      background: #f9f9f9;
+      border: 2px solid #ddd;
       border-radius: 10px;
-      width: 180px;
       padding: 20px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
       cursor: pointer;
+      text-align: center;
     }
     .option:hover {
-      transform: translateY(-8px);
+      transform: scale(1.05);
       box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-      border-color: #00A368;
+      border-color: #8e44ad;
     }
     .option h3 {
-      font-size: 18px;
+      font-size: 20px;
       color: #333;
-      margin-bottom: 5px;
-      font-weight: 500;
+      margin-bottom: 10px;
+      font-weight: 600;
     }
     .price {
-      font-size: 20px;
-      color: #00A368;
+      font-size: 18px;
+      color: #8e44ad;
       font-weight: 600;
-      margin-bottom: 10px;
     }
     button {
-      background-color: #00A368;
+      background-color: #8e44ad;
       color: #fff;
       padding: 10px 25px;
       border: none;
@@ -87,93 +91,95 @@
       transition: background-color 0.3s ease;
     }
     button:hover {
-      background-color: #008a5b;
+      background-color: #6c3483;
     }
     .footer-note {
-      font-size: 12px;
-      color: #888;
-      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+      margin-top: 20px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <h1>CartelUG Subscription</h1>
+    <h1>CartelUg Payments</h1>
 
     <div class="service-section">
-      <div class="service-title">Netflix Plans</div>
+      <div class="service-title">Select Service</div>
       <div class="options">
-        <div class="option" onclick="makePayment('Netflix', 1, 25000)">
-          <h3>1 Month</h3>
-          <div class="price">25,000 UGX</div>
-          <button>Pay Now</button>
+        <div class="option" onclick="displayPlans('Netflix')">
+          <h3>Netflix</h3>
+          <p class="price">From 45,000 UGX</p>
         </div>
-        <div class="option" onclick="makePayment('Netflix', 2, 40000)">
-          <h3>2 Months</h3>
-          <div class="price">40,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-        <div class="option" onclick="makePayment('Netflix', 3, 60000)">
-          <h3>3 Months</h3>
-          <div class="price">60,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-        <div class="option" onclick="makePayment('Netflix', 6, 120000)">
-          <h3>6 Months</h3>
-          <div class="price">120,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-        <div class="option" onclick="makePayment('Netflix', 12, 240000)">
-          <h3>1 Year</h3>
-          <div class="price">240,000 UGX</div>
-          <button>Pay Now</button>
+        <div class="option" onclick="displayPlans('Spotify')">
+          <h3>Spotify</h3>
+          <p class="price">From 30,000 UGX</p>
         </div>
       </div>
     </div>
 
-    <div class="service-section">
-      <div class="service-title">Spotify Plans</div>
-      <div class="options">
-        <div class="option" onclick="makePayment('Spotify', 2, 20000)">
-          <h3>2 Months</h3>
-          <div class="price">20,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-        <div class="option" onclick="makePayment('Spotify', 3, 30000)">
-          <h3>3 Months</h3>
-          <div class="price">30,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-        <div class="option" onclick="makePayment('Spotify', 6, 60000)">
-          <h3>6 Months</h3>
-          <div class="price">60,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-        <div class="option" onclick="makePayment('Spotify', 12, 120000)">
-          <h3>1 Year</h3>
-          <div class="price">120,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-      </div>
+    <div id="plan-section" style="display: none;">
+      <div id="plan-title" class="service-title"></div>
+      <div class="options" id="plan-options"></div>
     </div>
 
     <div class="footer-note">
-      <p>Payment is powered by Flutterwave. Please have your phone ready for payment confirmation.</p>
+      All payments are done via Mobile Money (MTN & Airtel). Please have your phone ready for payment confirmation.
     </div>
   </div>
 
   <script src="https://checkout.flutterwave.com/v3.js"></script>
   <script>
+    const plans = {
+      Netflix: [
+        { months: 2, price: 45000 },
+        { months: 3, price: 60000 },
+        { months: 6, price: 120000 },
+        { months: 12, price: 240000 }
+      ],
+      Spotify: [
+        { months: 3, price: 30000 },
+        { months: 6, price: 60000 },
+        { months: 12, price: 120000 }
+      ]
+    };
+
+    function displayPlans(service) {
+      document.getElementById('plan-section').style.display = 'block';
+      document.getElementById('plan-title').innerText = `${service} Plans`;
+      const planOptions = document.getElementById('plan-options');
+      planOptions.innerHTML = '';
+      plans[service].forEach(plan => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.onclick = () => makePayment(service, plan.months, plan.price);
+        div.innerHTML = `<h3>${plan.months} Months</h3><p class="price">${plan.price} UGX</p><button>Select</button>`;
+        planOptions.appendChild(div);
+      });
+    }
+
     function makePayment(service, months, amount) {
-      let phoneNumber = prompt("Enter your phone number:");
+      const name = prompt('Enter your name:');
+      if (!name) {
+        alert('Name is required.');
+        return;
+      }
+
+      const phoneNumber = prompt('Enter your phone number:');
       if (!phoneNumber) {
-        alert("Phone number is required.");
+        alert('Phone number is required.');
+        return;
+      }
+
+      const email = prompt('Enter your email:');
+      if (!email) {
+        alert('Email is required.');
         return;
       }
 
       const txRef = `TX-${Math.floor(Math.random() * 1000000)}`;
-      
+
       FlutterwaveCheckout({
         public_key: "FLWPUBK-52e4e9c7860c5e9b4a0df369b585f0fe-X",
         tx_ref: txRef,
@@ -182,9 +188,9 @@
         payment_options: "mobilemoneyuganda",
         redirect_url: "https://wa.link/4s3yih",
         customer: {
-          email: "carteluganda@gmail.com",
+          email: email,
           phonenumber: phoneNumber,
-          name: "Customer"
+          name: name
         },
         customizations: {
           title: `${service} Subscription`,
