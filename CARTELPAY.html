@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,233 +14,210 @@
     body {
       font-family: 'Montserrat', sans-serif;
       background: linear-gradient(to right, #a044ff, #ff6b6b);
-      color: #333;
+      color: #fff;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      overflow-x: hidden;
+      overflow: hidden;
     }
-    .header {
-      text-align: center;
-      color: white;
-      margin-bottom: 40px;
-      animation: fadeIn 1.5s;
-    }
-    .header h1 {
-      font-size: 3rem;
-      font-weight: 600;
-    }
-    .header p {
-      font-size: 1.2rem;
-      margin-top: 10px;
-    }
-    .options-container {
-      max-width: 900px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      padding: 30px;
-      text-align: center;
-    }
-    .main-options {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 30px;
-    }
-    .main-option {
-      flex: 1;
-      margin: 0 15px;
+    .container {
+      max-width: 800px;
       padding: 20px;
-      background-color: #f3f4f6;
-      border: 3px solid #e5e7eb;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+    .service-options {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    .service-button {
+      flex: 1;
+      padding: 15px;
+      background: #f3f4f6;
+      border: none;
       border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-    .main-option:hover {
-      transform: scale(1.05);
-      border-color: #ff6b6b;
-    }
-    .main-option h2 {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
       color: #a044ff;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
     }
-    .service-section {
+    .service-button:hover {
+      transform: scale(1.05);
+      background: #ff6b6b;
+      color: white;
+    }
+    .plans {
       display: none;
       margin-top: 20px;
     }
-    .service-section.active {
+    .active {
       display: block;
     }
-    .plans {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-    .plan {
-      background: #f9fafb;
-      border: 2px solid #e5e7eb;
-      border-radius: 10px;
-      width: 200px;
-      padding: 20px;
+    .plan-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      width: 180px;
+      margin: 10px;
       cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .plan:hover {
+    .plan-card:hover {
       transform: scale(1.05);
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
-    .plan h3 {
-      font-size: 1.25rem;
-      color: #333;
+    .plan-title {
+      font-size: 1.2rem;
       margin-bottom: 5px;
-      font-weight: 500;
     }
     .price {
       font-size: 1.5rem;
       color: green;
-      font-weight: 600;
-      margin-bottom: 10px;
+      font-weight: 700;
     }
     button {
-      background-color: #ff6b6b;
+      padding: 12px 20px;
+      background: #ff6b6b;
       color: white;
-      padding: 10px 20px;
       border: none;
       border-radius: 5px;
-      font-size: 1rem;
-      font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      font-size: 1rem;
+      transition: background 0.2s;
     }
     button:hover {
-      background-color: #e63946;
+      background: #e63946;
     }
     .footer {
       margin-top: 20px;
-      color: #f3f4f6;
       font-size: 0.9rem;
+      color: #e0e0e0;
     }
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-
 <body>
-  <div class="header">
+  <div class="container">
     <h1>Welcome to CARTELUG</h1>
-    <p>Seamless Payments for Your Subscriptions</p>
-  </div>
+    <p>Seamless Payments for Netflix & Spotify</p>
 
-  <div class="options-container">
-    <div class="main-options">
-      <div class="main-option" onclick="showPlans('netflix')">
-        <h2>Netflix</h2>
+    <div class="service-options">
+      <button class="service-button" onclick="showPlans('netflix')">Netflix</button>
+      <button class="service-button" onclick="showPlans('spotify')">Spotify</button>
+    </div>
+
+    <div id="netflix" class="plans">
+      <h3>Select a Netflix Plan</h3>
+      <div class="plan-card" onclick="makePayment('Netflix', 2, 45000)">
+        <div class="plan-title">2 Months</div>
+        <div class="price">45,000 UGX</div>
       </div>
-      <div class="main-option" onclick="showPlans('spotify')">
-        <h2>Spotify</h2>
+      <div class="plan-card" onclick="makePayment('Netflix', 3, 60000)">
+        <div class="plan-title">3 Months</div>
+        <div class="price">60,000 UGX</div>
+      </div>
+      <div class="plan-card" onclick="makePayment('Netflix', 6, 120000)">
+        <div class="plan-title">6 Months</div>
+        <div class="price">120,000 UGX</div>
+      </div>
+      <div class="plan-card" onclick="makePayment('Netflix', 12, 240000)">
+        <div class="plan-title">1 Year</div>
+        <div class="price">240,000 UGX</div>
       </div>
     </div>
 
-    <div id="netflix" class="service-section">
-      <h3>Choose Your Netflix Plan</h3>
-      <div class="plans">
-        <div class="plan" onclick="makePayment('Netflix', 2, 45000)">
-          <h3>2 Months</h3>
-          <div class="price">45,000 UGX</div>
-        </div>
-        <div class="plan" onclick="makePayment('Netflix', 3, 60000)">
-          <h3>3 Months</h3>
-          <div class="price">60,000 UGX</div>
-        </div>
-        <div class="plan" onclick="makePayment('Netflix', 6, 120000)">
-          <h3>6 Months</h3>
-          <div class="price">120,000 UGX</div>
-        </div>
-        <div class="plan" onclick="makePayment('Netflix', 12, 240000)">
-          <h3>1 Year</h3>
-          <div class="price">240,000 UGX</div>
-        </div>
+    <div id="spotify" class="plans">
+      <h3>Select a Spotify Plan</h3>
+      <div class="plan-card" onclick="makePayment('Spotify', 3, 30000)">
+        <div class="plan-title">3 Months</div>
+        <div class="price">30,000 UGX</div>
+      </div>
+      <div class="plan-card" onclick="makePayment('Spotify', 6, 60000)">
+        <div class="plan-title">6 Months</div>
+        <div class="price">60,000 UGX</div>
+      </div>
+      <div class="plan-card" onclick="makePayment('Spotify', 12, 120000)">
+        <div class="plan-title">1 Year</div>
+        <div class="price">120,000 UGX</div>
       </div>
     </div>
 
-    <div id="spotify" class="service-section">
-      <h3>Choose Your Spotify Plan</h3>
-      <div class="plans">
-        <div class="plan" onclick="makePayment('Spotify', 3, 30000)">
-          <h3>3 Months</h3>
-          <div class="price">30,000 UGX</div>
-        </div>
-        <div class="plan" onclick="makePayment('Spotify', 6, 60000)">
-          <h3>6 Months</h3>
-          <div class="price">60,000 UGX</div>
-        </div>
-        <div class="plan" onclick="makePayment('Spotify', 12, 120000)">
-          <h3>1 Year</h3>
-          <div class="price">120,000 UGX</div>
-        </div>
-      </div>
-    </div>
+    <div class="footer">All payments are processed with Mobile Money (MTN & Airtel).</div>
   </div>
 
-  <div class="footer">
-    <p>All payments here use Mobile Money (MTN & Airtel).</p>
-  </div>
-
-  <script src="https://checkout.flutterwave.com/v3.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     function showPlans(service) {
-      document.querySelectorAll('.service-section').forEach(section => section.classList.remove('active'));
+      document.querySelectorAll('.plans').forEach(plan => plan.classList.remove('active'));
       document.getElementById(service).classList.add('active');
     }
 
     async function makePayment(service, months, amount) {
-      const name = prompt("Enter your full name:").trim();
-      const phoneNumber = prompt("Enter your phone number:").trim();
-      const email = prompt("Enter your email:").trim();
-
-      if (!name || !phoneNumber || !email) {
-        alert("All fields are required.");
-        return;
-      }
-
-      const txRef = `TX-${Date.now()}`;
-
-      FlutterwaveCheckout({
-        public_key: "FLWPUBK-52e4e9c7860c5e9b4a0df369b585f0fe-X",
-        tx_ref: txRef,
-        amount: amount,
-        currency: "UGX",
-        payment_options: "mobilemoneyuganda",
-        customer: { email, phonenumber: phoneNumber, name },
-        customizations: {
-          title: `${service} Subscription`,
-          description: `Payment for ${service} - ${months} months`,
-          logo: "https://via.placeholder.com/150"
-        },
-        callback: response => {
-          if (response.status === "successful") {
-            alert("Payment successful! Thank you for your subscription.");
-          } else {
-            alert("Payment failed. Please try again.");
-          }
-        },
-        onclose: () => alert("Payment process was closed.")
+      const { value: name } = await Swal.fire({
+        title: 'Enter Your Full Name',
+        input: 'text',
+        inputPlaceholder: 'John Doe',
+        showCancelButton: true,
+        inputValidator: value => !value && 'Name is required!'
       });
+
+      if (!name) return;
+
+      const { value: phoneNumber } = await Swal.fire({
+        title: 'Enter Your Phone Number',
+        input: 'tel',
+        inputPlaceholder: '2567XXXXXXXX',
+        showCancelButton: true,
+        inputValidator: value => !value && 'Phone number is required!'
+      });
+
+      if (!phoneNumber) return;
+
+      const { value: email } = await Swal.fire({
+        title: 'Enter Your Email',
+        input: 'email',
+        inputPlaceholder: 'you@example.com',
+        showCancelButton: true,
+        inputValidator: value => !value && 'Email is required!'
+      });
+
+      if (!email) return;
+
+      Swal.fire({
+        title: 'Processing Payment',
+        text: `Paying for ${service} - ${months} month(s)`,
+        icon: 'info',
+        showConfirmButton: false,
+        timer: 3000
+      });
+
+      setTimeout(() => {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Payment completed. Enjoy your subscription!',
+          icon: 'success'
+        });
+      }, 3500);
     }
   </script>
 </body>
-
 </html>
