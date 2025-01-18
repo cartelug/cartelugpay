@@ -13,211 +13,143 @@
     }
     body {
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(to right, #a044ff, #ff6b6b);
+      background: linear-gradient(to right, #1e3c72, #2a5298);
       color: #fff;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      overflow: hidden;
+      overflow-x: hidden;
     }
     .container {
-      max-width: 800px;
-      padding: 20px;
-      text-align: center;
       background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 40px;
       border-radius: 15px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
     }
-    h1 {
-      font-size: 2.8rem;
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
       margin-bottom: 10px;
-      animation: fadeIn 1s ease-in-out;
     }
-    p {
-      font-size: 1.1rem;
+    .header p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+    .form-group {
       margin-bottom: 20px;
     }
-    .service-options {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-    }
-    .service-button {
-      flex: 1;
-      padding: 15px;
-      background: #f3f4f6;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #a044ff;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.3s ease;
-    }
-    .service-button:hover {
-      transform: scale(1.05);
-      background: #ff6b6b;
-      color: white;
-    }
-    .plans {
-      display: none;
-      margin-top: 20px;
-    }
-    .active {
-      display: block;
-    }
-    .plan-card {
-      background: #fff;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
-      width: 180px;
-      margin: 10px;
-      cursor: pointer;
-    }
-    .plan-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-    .plan-title {
-      font-size: 1.2rem;
-      margin-bottom: 5px;
-    }
-    .price {
-      font-size: 1.5rem;
-      color: green;
-      font-weight: 700;
-    }
-    button {
-      padding: 12px 20px;
-      background: #ff6b6b;
-      color: white;
+    input {
+      width: 100%;
+      padding: 12px 15px;
       border: none;
       border-radius: 5px;
-      cursor: pointer;
       font-size: 1rem;
-      transition: background 0.2s;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #ff6b6b;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
     button:hover {
-      background: #e63946;
+      background-color: #e63946;
     }
-    .footer {
-      margin-top: 20px;
-      font-size: 0.9rem;
-      color: #e0e0e0;
+    .loader {
+      display: none;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #ff6b6b;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 15px auto;
     }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(-20px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Welcome to CARTELUG</h1>
-    <p>Seamless Payments for Netflix & Spotify</p>
-
-    <div class="service-options">
-      <button class="service-button" onclick="showPlans('netflix')">Netflix</button>
-      <button class="service-button" onclick="showPlans('spotify')">Spotify</button>
+    <div class="header">
+      <h1>Welcome to CARTELUG</h1>
+      <p>Seamless Payments for Your Subscriptions</p>
     </div>
-
-    <div id="netflix" class="plans">
-      <h3>Select a Netflix Plan</h3>
-      <div class="plan-card" onclick="makePayment('Netflix', 2, 45000)">
-        <div class="plan-title">2 Months</div>
-        <div class="price">45,000 UGX</div>
+    <form id="paymentForm">
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Full Name" required>
       </div>
-      <div class="plan-card" onclick="makePayment('Netflix', 3, 60000)">
-        <div class="plan-title">3 Months</div>
-        <div class="price">60,000 UGX</div>
+      <div class="form-group">
+        <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
       </div>
-      <div class="plan-card" onclick="makePayment('Netflix', 6, 120000)">
-        <div class="plan-title">6 Months</div>
-        <div class="price">120,000 UGX</div>
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Email Address" required>
       </div>
-      <div class="plan-card" onclick="makePayment('Netflix', 12, 240000)">
-        <div class="plan-title">1 Year</div>
-        <div class="price">240,000 UGX</div>
-      </div>
-    </div>
-
-    <div id="spotify" class="plans">
-      <h3>Select a Spotify Plan</h3>
-      <div class="plan-card" onclick="makePayment('Spotify', 3, 30000)">
-        <div class="plan-title">3 Months</div>
-        <div class="price">30,000 UGX</div>
-      </div>
-      <div class="plan-card" onclick="makePayment('Spotify', 6, 60000)">
-        <div class="plan-title">6 Months</div>
-        <div class="price">60,000 UGX</div>
-      </div>
-      <div class="plan-card" onclick="makePayment('Spotify', 12, 120000)">
-        <div class="plan-title">1 Year</div>
-        <div class="price">120,000 UGX</div>
-      </div>
-    </div>
-
-    <div class="footer">All payments are processed with Mobile Money (MTN & Airtel).</div>
+      <button type="submit">Pay Now</button>
+      <div class="loader" id="loader"></div>
+    </form>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
   <script>
-    function showPlans(service) {
-      document.querySelectorAll('.plans').forEach(plan => plan.classList.remove('active'));
-      document.getElementById(service).classList.add('active');
-    }
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const loader = document.getElementById('loader');
+      loader.style.display = 'block';
 
-    async function makePayment(service, months, amount) {
-      const { value: name } = await Swal.fire({
-        title: 'Enter Your Full Name',
-        input: 'text',
-        inputPlaceholder: 'John Doe',
-        showCancelButton: true,
-        inputValidator: value => !value && 'Name is required!'
+      const name = document.getElementById('name').value;
+      const phoneNumber = document.getElementById('phoneNumber').value;
+      const email = document.getElementById('email').value;
+      const txRef = `TX-${Math.floor(Math.random() * 1000000)}`;
+
+      FlutterwaveCheckout({
+        public_key: "FLWPUBK-52e4e9c7860c5e9b4a0df369b585f0fe-X",
+        tx_ref: txRef,
+        amount: 45000,
+        currency: "UGX",
+        payment_options: "mobilemoneyuganda",
+        customer: {
+          email: email,
+          phonenumber: phoneNumber,
+          name: name,
+        },
+        customizations: {
+          title: "Cartel UG Subscription",
+          description: "Payment for 2-month Netflix plan",
+          logo: "https://via.placeholder.com/150",
+        },
+        callback: function(response) {
+          loader.style.display = 'none';
+          if (response.status === "successful") {
+            alert("Payment successful! Thank you for your subscription.");
+          } else {
+            alert("Payment failed. Please try again.");
+          }
+        },
+        onclose: function() {
+          loader.style.display = 'none';
+          alert("Payment process was closed.");
+        }
       });
-
-      if (!name) return;
-
-      const { value: phoneNumber } = await Swal.fire({
-        title: 'Enter Your Phone Number',
-        input: 'tel',
-        inputPlaceholder: '2567XXXXXXXX',
-        showCancelButton: true,
-        inputValidator: value => !value && 'Phone number is required!'
-      });
-
-      if (!phoneNumber) return;
-
-      const { value: email } = await Swal.fire({
-        title: 'Enter Your Email',
-        input: 'email',
-        inputPlaceholder: 'you@example.com',
-        showCancelButton: true,
-        inputValidator: value => !value && 'Email is required!'
-      });
-
-      if (!email) return;
-
-      Swal.fire({
-        title: 'Processing Payment',
-        text: `Paying for ${service} - ${months} month(s)`,
-        icon: 'info',
-        showConfirmButton: false,
-        timer: 3000
-      });
-
-      setTimeout(() => {
-        Swal.fire({
-          title: 'Success!',
-          text: 'Payment completed. Enjoy your subscription!',
-          icon: 'success'
-        });
-      }, 3500);
-    }
+    });
   </script>
 </body>
 </html>
