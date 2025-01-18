@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +27,7 @@
       text-align: center;
       color: white;
       margin-bottom: 40px;
-      animation: fadeIn 2s;
+      animation: fadeIn 1.5s;
     }
     .header h1 {
       font-size: 3rem;
@@ -137,11 +138,13 @@
     }
   </style>
 </head>
+
 <body>
   <div class="header">
     <h1>Welcome to CARTELUG</h1>
     <p>Seamless Payments for Your Subscriptions</p>
   </div>
+
   <div class="options-container">
     <div class="main-options">
       <div class="main-option" onclick="showPlans('netflix')">
@@ -151,6 +154,7 @@
         <h2>Spotify</h2>
       </div>
     </div>
+
     <div id="netflix" class="service-section">
       <h3>Choose Your Netflix Plan</h3>
       <div class="plans">
@@ -172,6 +176,7 @@
         </div>
       </div>
     </div>
+
     <div id="spotify" class="service-section">
       <h3>Choose Your Spotify Plan</h3>
       <div class="plans">
@@ -190,9 +195,11 @@
       </div>
     </div>
   </div>
+
   <div class="footer">
     <p>All payments here use Mobile Money (MTN & Airtel).</p>
   </div>
+
   <script src="https://checkout.flutterwave.com/v3.js"></script>
   <script>
     function showPlans(service) {
@@ -200,54 +207,41 @@
       document.getElementById(service).classList.add('active');
     }
 
-    function makePayment(service, months, amount) {
-      const name = prompt("Enter your full name:");
-      if (!name) {
-        alert("Name is required.");
+    async function makePayment(service, months, amount) {
+      const name = prompt("Enter your full name:").trim();
+      const phoneNumber = prompt("Enter your phone number:").trim();
+      const email = prompt("Enter your email:").trim();
+
+      if (!name || !phoneNumber || !email) {
+        alert("All fields are required.");
         return;
       }
 
-      const phoneNumber = prompt("Enter your phone number:");
-      if (!phoneNumber) {
-        alert("Phone number is required.");
-        return;
-      }
+      const txRef = `TX-${Date.now()}`;
 
-      const email = prompt("Enter your email:");
-      if (!email) {
-        alert("Email is required.");
-        return;
-      }
-
-      const txRef = `TX-${Math.floor(Math.random() * 1000000)}`;
       FlutterwaveCheckout({
         public_key: "FLWPUBK-52e4e9c7860c5e9b4a0df369b585f0fe-X",
         tx_ref: txRef,
         amount: amount,
         currency: "UGX",
         payment_options: "mobilemoneyuganda",
-        customer: {
-          email: email,
-          phonenumber: phoneNumber,
-          name: name,
-        },
+        customer: { email, phonenumber: phoneNumber, name },
         customizations: {
           title: `${service} Subscription`,
           description: `Payment for ${service} - ${months} months`,
-          logo: "https://via.placeholder.com/150",
+          logo: "https://via.placeholder.com/150"
         },
-        callback: function(response) {
+        callback: response => {
           if (response.status === "successful") {
             alert("Payment successful! Thank you for your subscription.");
           } else {
             alert("Payment failed. Please try again.");
           }
         },
-        onclose: function() {
-          alert("Payment process was closed.");
-        }
+        onclose: () => alert("Payment process was closed.")
       });
     }
   </script>
 </body>
+
 </html>
