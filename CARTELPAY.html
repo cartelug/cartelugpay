@@ -28,6 +28,10 @@
         .header {
             margin-bottom: 50px;
         }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
         .display-4 {
             font-weight: 700;
             text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -100,6 +104,21 @@
             background: rgba(0, 0, 0, 0.8);
             color: #fff;
         }
+        .processing-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            z-index: 1000;
+            display: none;
+        }
         @media (max-width: 767px) {
             .plan {
                 margin-bottom: 20px;
@@ -111,6 +130,7 @@
 
 <div class="container">
     <div class="header">
+        <img src="/mnt/data/Purple Abstract A Letter Free Logo.png" alt="Company Logo" class="logo">
         <h1 class="display-4">CartelUG Payments</h1>
         <p class="lead">Elevate Your Entertainment with Netflix & Spotify</p>
     </div>
@@ -176,8 +196,8 @@
         </div>
     </div>
 
-    <div id="loading" class="loader text-center" style="display: none;">
-        <p>Processing your payment...</p>
+    <div id="processingOverlay" class="processing-overlay">
+        Processing your payment...
     </div>
 
     <div class="footer">
@@ -208,7 +228,8 @@
     }
 
     function initiatePayment(service, amount) {
-        document.getElementById('loading').style.display = 'block';
+        const overlay = document.getElementById('processingOverlay');
+        overlay.style.display = 'flex';
 
         FlutterwaveCheckout({
             public_key: "FLWPUBK-52e4e9c7860c5e9b4a0df369b585f0fe-X",
@@ -224,14 +245,14 @@
             customizations: {
                 title: `${service} Subscription`,
                 description: `Payment for ${service}`,
-                logo: "https://via.placeholder.com/150",
+                logo: "/mnt/data/Purple Abstract A Letter Free Logo.png",
             },
             callback: (response) => {
-                document.getElementById('loading').style.display = 'none';
+                overlay.style.display = 'none';
                 alert(response.status === "successful" ? "Payment successful! Enjoy your subscription." : "Payment failed. Try again.");
             },
             onclose: () => {
-                document.getElementById('loading').style.display = 'none';
+                overlay.style.display = 'none';
                 alert("Payment process closed.");
             },
         });
