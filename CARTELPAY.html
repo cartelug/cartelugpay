@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #800080, #FF69B4);
+            background: #000;
             color: #fff;
             padding-top: 50px;
             min-height: 100vh;
@@ -28,50 +28,57 @@
         .header {
             margin-bottom: 50px;
         }
-        .logo {
-            max-width: 150px;
-            margin-bottom: 20px;
-        }
         .display-4 {
             font-weight: 700;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            color: #FFD700;
+            text-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+            color: #FF69B4;
         }
         .lead {
             font-size: 1.2rem;
-            color: #f9f9f9;
+            color: #ccc;
         }
-        .btn-primary, .btn-light {
-            font-size: 1.1rem;
-            padding: 10px 30px;
-            border-radius: 30px;
+        .form-container .form-label {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #FF69B4;
+        }
+        .form-control {
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1rem;
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+        .form-control:focus {
+            border: 2px solid #FF69B4;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
         }
         .btn-primary {
             background: linear-gradient(135deg, #FF69B4, #FF4500);
             border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 10px;
+            padding: 12px 20px;
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .btn-primary:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-        }
-        .service-btn {
-            margin: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: #FFD700;
-            transition: transform 0.3s, background 0.3s;
-        }
-        .service-btn:hover {
-            background: rgba(255, 255, 255, 0.4);
             transform: scale(1.05);
-            color: #FF69B4;
+            box-shadow: 0 8px 15px rgba(255, 69, 0, 0.4);
         }
         .plans-container {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 30px rgba(255, 255, 255, 0.1);
             animation: fadeIn 1s ease-in-out;
         }
         @keyframes fadeIn {
@@ -86,23 +93,23 @@
             transition: transform 0.3s, background 0.3s;
             text-align: center;
             margin: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
         }
         .plan:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
             transform: scale(1.05);
         }
         .price {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #FFD700;
+            color: #FF69B4;
         }
         .footer {
             text-align: center;
             margin-top: 50px;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
+            background: #111;
+            color: #ccc;
         }
         .processing-overlay {
             position: fixed;
@@ -110,7 +117,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             color: #fff;
             display: flex;
             justify-content: center;
@@ -130,7 +137,6 @@
 
 <div class="container">
     <div class="header">
-        <img src="/mnt/data/Purple Abstract A Letter Free Logo.png" alt="Company Logo" class="logo">
         <h1 class="display-4">CartelUG Payments</h1>
         <p class="lead">Elevate Your Entertainment with Netflix & Spotify</p>
     </div>
@@ -142,7 +148,7 @@
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">Phone Number</label>
-            <input type="tel" class="form-control" id="phone" placeholder="e.g., +256700000000" required>
+            <input type="tel" class="form-control" id="phone" placeholder="e.g., 0708xxxxxx" required>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email Address</label>
@@ -244,8 +250,7 @@
             },
             customizations: {
                 title: `${service} Subscription`,
-                description: `Payment for ${service}`,
-                logo: "/mnt/data/Purple Abstract A Letter Free Logo.png",
+                description: `Payment for ${service}`
             },
             callback: (response) => {
                 overlay.style.display = 'none';
