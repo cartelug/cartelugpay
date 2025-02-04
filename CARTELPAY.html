@@ -1,274 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CartelUG Payments | Premium Subscriptions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
-            color: #fff;
-            padding-top: 50px;
-            min-height: 100vh;
-            overflow-x: hidden;
-            animation: fadeInBody 1.5s ease-in-out;
-        }
-        @keyframes fadeInBody {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 20px;
-            background: #111;
-        }
-        .header {
-            margin-bottom: 40px;
-        }
-        .display-4 {
-            font-weight: 700;
-            text-shadow: 0 4px 15px rgba(255, 105, 180, 0.6);
-            color: #FF69B4;
-        }
-        .lead {
-            font-size: 1.1rem;
-            color: #bbb;
-        }
-        .form-container .form-label {
-            font-weight: bold;
-            font-size: 1rem;
-            color: #FF69B4;
-        }
-        .form-control {
-            border-radius: 10px;
-            padding: 15px;
-            font-size: 1rem;
-            border: 2px solid transparent;
-            background: #fff;
-            color: #000;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .form-control::placeholder {
-            color: #666;
-            font-style: italic;
-        }
-        .form-control:focus {
-            border: 2px solid #FF69B4;
-            background: #f9f9f9;
-            outline: none;
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.6);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #FF69B4, #FF4500);
-            border: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 10px;
-            padding: 12px 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .btn-primary:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(255, 69, 0, 0.6);
-        }
-        .plans-container {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
-            animation: fadeIn 1s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .plan {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
-            text-align: center;
-            margin: 10px;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-        }
-        .plan:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
-        .price {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #FF69B4;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 15px;
-            background: #222;
-            color: #ccc;
-            border-radius: 10px;
-        }
-        .processing-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            z-index: 1000;
-            display: none;
-        }
-        @media (max-width: 767px) {
-            .plan {
-                margin-bottom: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CartelUG | Seamless Mobile Money Payments</title>
+  
+  <!-- Montserrat Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /***************************************************************
+      RESET & GLOBAL STYLES
+    ***************************************************************/
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+    body {
+      /* Purple-to-Orange Gradient Background */
+      background: linear-gradient(45deg, #6C00FF 0%, #FF7A00 100%);
+      background-attachment: fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Smooth Animations for the body (optional subtle fade-in) */
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /***************************************************************
+      CONTAINER
+    ***************************************************************/
+    .container {
+      position: relative;
+      max-width: 800px;
+      width: 90%;
+      margin: 40px auto;
+      /* Glassmorphic styling */
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      padding: 40px 30px;
+      text-align: center;
+      /* Subtle "floating" animation for the container */
+      animation: floatContainer 6s ease-in-out infinite;
+    }
+    @keyframes floatContainer {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /***************************************************************
+      HEADINGS
+    ***************************************************************/
+    h1 {
+      font-weight: 600;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      /* Slight gradient text effect for the main title */
+      background: linear-gradient(45deg, #c884ff, #ffc484);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .service-title {
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #eaeaea;
+      position: relative;
+      display: inline-block;
+    }
+    /* A small decorative underline effect for sub-headings */
+    .service-title::after {
+      content: "";
+      display: block;
+      width: 50%;
+      height: 2px;
+      background: #fff;
+      margin: 8px auto 0;
+      opacity: 0.7;
+    }
+
+    /***************************************************************
+      OPTIONS / CARDS
+    ***************************************************************/
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .option {
+      position: relative;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      width: 180px;
+      padding: 20px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    /* Hover tilt + shadow effect */
+    .option:hover {
+      transform: perspective(600px) rotateX(5deg) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .option h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .price {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      /* Light color with a slight text shadow */
+      color: #fff;
+      text-shadow: 0 0 6px rgba(255,255,255,0.2);
+    }
+
+    /***************************************************************
+      BUTTONS
+    ***************************************************************/
+    /* Attractive but not-too-bright green color */
+    button {
+      background-color: #2ecc71;
+      color: #ffffff;
+      padding: 12px 25px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 25px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      outline: none;
+    }
+    button:hover {
+      background-color: #27ae60;
+      transform: translateY(-2px);
+    }
+
+    /***************************************************************
+      MODAL
+    ***************************************************************/
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.6);
+      /* Fade-in animation for modal background */
+      animation: modalFadeIn 0.5s forwards;
+      opacity: 0; /* Start invisible, use JS to show */
+    }
+    @keyframes modalFadeIn {
+      to { opacity: 1; }
+    }
+    .modal-content {
+      position: relative;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      width: 90%;
+      max-width: 500px;
+      padding: 30px;
+      text-align: center;
+      animation: slideUp 0.5s ease forwards;
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .modal-content h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 4px rgba(255,255,255,0.3);
+    }
+    .modal-content p {
+      color: #eee;
+      font-size: 16px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .modal-content ul {
+      text-align: left;
+      margin: 10px 0;
+      padding-left: 20px;
+      color: #fefefe;
+      font-size: 18px; /* Increase the font size for readability */
+      font-weight: 600; /* Make it bold to stand out */
+    }
+    .modal-content li {
+      margin: 8px 0;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #fff;
+      background: none;
+      border: none;
+      outline: none;
+      transition: transform 0.3s ease;
+    }
+    .close-btn:hover {
+      transform: scale(1.2);
+    }
+
+    /***************************************************************
+      RESPONSIVE
+    ***************************************************************/
+    @media (max-width: 768px) {
+      .options {
+        flex-direction: column;
+        align-items: center;
+      }
+      .option {
+        width: 100%;
+        max-width: 320px;
+      }
+      .modal-content {
+        max-width: 90%;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1 class="display-4">CartelUG Payments</h1>
-        <p class="lead">Elevate Your Entertainment with Netflix & Spotify</p>
-    </div>
+  <div class="container">
+    <h1>CartelUG Subscription Payment</h1>
 
-    <form id="paymentForm" class="form-container mb-4">
-        <div class="mb-3">
-            <label for="name" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+    <!-- Netflix Plans -->
+    <div class="service-section">
+      <div class="service-title">Netflix Plans</div>
+      <div class="options">
+        <!-- 2 Months -->
+        <div class="option" onclick="showPaymentOptions('Netflix','2 Months')">
+          <h3>2 Months</h3>
+          <div class="price">45,000 UGX</div>
+          <button>Pay Now</button>
         </div>
-        <div class="mb-3">
-            <label for="phone" class="form-label">Phone Number</label>
-            <input type="tel" class="form-control" id="phone" placeholder="e.g., 0708xxxxxx" required>
+        <!-- 3 Months -->
+        <div class="option" onclick="showPaymentOptions('Netflix','3 Months')">
+          <h3>3 Months</h3>
+          <div class="price">60,000 UGX</div>
+          <button>Pay Now</button>
         </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+        <!-- 6 Months -->
+        <div class="option" onclick="showPaymentOptions('Netflix','6 Months')">
+          <h3>6 Months</h3>
+          <div class="price">120,000 UGX</div>
+          <button>Pay Now</button>
         </div>
-        <button type="button" class="btn btn-primary w-100" onclick="showServiceOptions()">Continue</button>
-    </form>
-
-    <div id="serviceOptions" class="service-options text-center" style="display: none;">
-        <button class="btn btn-light service-btn" onclick="showPlans('netflix')">Netflix Subscription</button>
-        <button class="btn btn-light service-btn" onclick="showPlans('spotify')">Spotify Premium</button>
-    </div>
-
-    <div id="netflixPlans" class="plans-container" style="display: none;">
-        <h3 class="text-center mb-4">Netflix Plans</h3>
-        <div class="d-flex flex-wrap justify-content-center">
-            <div class="plan" onclick="initiatePayment('Netflix', 45000)">
-                <h4>2 Months</h4>
-                <p class="price">45,000 UGX</p>
-            </div>
-            <div class="plan" onclick="initiatePayment('Netflix', 60000)">
-                <h4>3 Months</h4>
-                <p class="price">60,000 UGX</p>
-            </div>
-            <div class="plan" onclick="initiatePayment('Netflix', 120000)">
-                <h4>6 Months</h4>
-                <p class="price">120,000 UGX</p>
-            </div>
-            <div class="plan" onclick="initiatePayment('Netflix', 240000)">
-                <h4>1 Year</h4>
-                <p class="price">240,000 UGX</p>
-            </div>
+        <!-- 1 Year -->
+        <div class="option" onclick="showPaymentOptions('Netflix','1 Year')">
+          <h3>1 Year</h3>
+          <div class="price">240,000 UGX</div>
+          <button>Pay Now</button>
         </div>
+      </div>
     </div>
 
-    <div id="spotifyPlans" class="plans-container" style="display: none;">
-        <h3 class="text-center mb-4">Spotify Plans</h3>
-        <div class="d-flex flex-wrap justify-content-center">
-            <div class="plan" onclick="initiatePayment('Spotify', 30000)">
-                <h4>3 Months</h4>
-                <p class="price">30,000 UGX</p>
-            </div>
-            <div class="plan" onclick="initiatePayment('Spotify', 60000)">
-                <h4>6 Months</h4>
-                <p class="price">60,000 UGX</p>
-            </div>
-            <div class="plan" onclick="initiatePayment('Spotify', 120000)">
-                <h4>1 Year</h4>
-                <p class="price">120,000 UGX</p>
-            </div>
+    <!-- Spotify Plans -->
+    <div class="service-section">
+      <div class="service-title">Spotify Plans</div>
+      <div class="options">
+        <!-- 3 Months -->
+        <div class="option" onclick="showPaymentOptions('Spotify','3 Months')">
+          <h3>3 Months</h3>
+          <div class="price">30,000 UGX</div>
+          <button>Pay Now</button>
         </div>
+        <!-- 6 Months -->
+        <div class="option" onclick="showPaymentOptions('Spotify','6 Months')">
+          <h3>6 Months</h3>
+          <div class="price">60,000 UGX</div>
+          <button>Pay Now</button>
+        </div>
+        <!-- 1 Year -->
+        <div class="option" onclick="showPaymentOptions('Spotify','1 Year')">
+          <h3>1 Year</h3>
+          <div class="price">120,000 UGX</div>
+          <button>Pay Now</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div id="processingOverlay" class="processing-overlay">
-        Processing your payment...
+  <!-- Payment Modal -->
+  <div id="paymentModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <h2>Payment Instructions</h2>
+      <p>Please send the payment to one of the following mobile money numbers:</p>
+      <ul>
+        <li><strong>MTN:</strong> 0762193386 (Alfred)</li>
+        <li><strong>Airtel:</strong> 0744688623 (Alfred)</li>
+      </ul>
+      <p>Once you've sent the payment, click the "Confirm Payment" button to notify us.</p>
+      <!-- This button will dynamically redirect to the correct WhatsApp message -->
+      <button id="confirmBtn">Confirm Payment</button>
     </div>
+  </div>
 
-    <div class="footer">
-        <p>&copy; 2025 CartelUG | Secure Payments for Premium Entertainment</p>
-    </div>
-</div>
+  <script>
+    // This function is called when a plan is selected
+    // 'service' is either 'Netflix' or 'Spotify'
+    // 'plan' is something like '2 Months', '3 Months', etc.
+    function showPaymentOptions(service, plan) {
+      // Show the modal
+      const modal = document.getElementById('paymentModal');
+      modal.style.display = 'flex';
 
-<script src="https://checkout.flutterwave.com/v3.js"></script>
-<script>
-    const userInfo = {};
+      // Build the custom WhatsApp message
+      // Example: "#Netflix 2 Months payment completed"
+      const customMessage = `#${service} ${plan} payment completed`;
 
-    function showServiceOptions() {
-        userInfo.name = document.getElementById('name').value;
-        userInfo.phone = document.getElementById('phone').value;
-        userInfo.email = document.getElementById('email').value;
+      // Encode the message for use in the WhatsApp URL
+      const encodedMessage = encodeURIComponent(customMessage);
 
-        if (userInfo.name && userInfo.phone && userInfo.email) {
-            document.getElementById('paymentForm').style.display = 'none';
-            document.getElementById('serviceOptions').style.display = 'block';
-        } else {
-            alert('Please fill out all fields.');
-        }
+      // Replace +256744688623 as requested
+      const whatsappNumber = '256744688623';
+
+      // Set the Confirm Payment button's click action
+      document.getElementById('confirmBtn').onclick = function() {
+        window.open(`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`, '_blank');
+      };
     }
 
-    function showPlans(service) {
-        document.getElementById('serviceOptions').style.display = 'none';
-        document.getElementById(service === 'netflix' ? 'netflixPlans' : 'spotifyPlans').style.display = 'block';
+    // Close modal
+    function closeModal() {
+      document.getElementById('paymentModal').style.display = 'none';
     }
 
-    function initiatePayment(service, amount) {
-        const overlay = document.getElementById('processingOverlay');
-        overlay.style.display = 'flex';
-
-        FlutterwaveCheckout({
-            public_key: "FLWPUBK-52e4e9c7860c5e9b4a0df369b585f0fe-X",
-            tx_ref: `TX-${Math.floor(Math.random() * 1000000)}`,
-            amount,
-            currency: "UGX",
-            payment_options: "mobilemoneyuganda",
-            customer: {
-                email: userInfo.email,
-                phonenumber: userInfo.phone,
-                name: userInfo.name,
-            },
-            customizations: {
-                title: `${service} Subscription`,
-                description: `Payment for ${service}`
-            },
-            callback: (response) => {
-                overlay.style.display = 'none';
-                alert(response.status === "successful" ? "Payment successful! Enjoy your subscription." : "Payment failed. Try again.");
-            },
-            onclose: () => {
-                overlay.style.display = 'none';
-                alert("Payment process closed.");
-            },
-        });
+    // Close modal on click outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('paymentModal');
+      if (event.target === modal) {
+        closeModal();
+      }
     }
-</script>
-
+  </script>
 </body>
 </html>
