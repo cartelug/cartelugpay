@@ -21,10 +21,10 @@
       padding: 0;
     }
     html, body {
+      width: 100%;
       height: 100%;
       font-family: 'Montserrat', sans-serif;
       color: #ffffff;
-      overflow-x: hidden;
     }
     body {
       /* Purple-to-Orange Gradient Background */
@@ -34,12 +34,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* Smooth Animations for the body (optional subtle fade-in) */
-      animation: fadeIn 1s ease forwards;
-      opacity: 0;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
+      /* Directly set opacity to 1 (no fadeIn trap for older mobiles) */
+      opacity: 1;
     }
 
     /***************************************************************
@@ -50,16 +46,19 @@
       max-width: 800px;
       width: 90%;
       margin: 40px auto;
-      /* Glassmorphic styling */
-      background: rgba(255, 255, 255, 0.15);
+      
+      /* Glassmorphic styling with fallback */
+      background-color: rgba(255, 255, 255, 0.2); /* fallback if backdrop-filter not supported */
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.25);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       padding: 40px 30px;
       text-align: center;
-      /* Subtle "floating" animation for the container */
+      
+      /* Subtle floating animation on desktop only */
       animation: floatContainer 6s ease-in-out infinite;
     }
     @keyframes floatContainer {
@@ -116,14 +115,11 @@
       border: 1px solid rgba(255, 255, 255, 0.25);
       width: 180px;
       padding: 20px;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
       cursor: pointer;
       overflow: hidden;
-    }
-    /* Hover tilt + shadow effect */
-    .option:hover {
-      transform: perspective(600px) rotateX(5deg) scale(1.05);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      /* We remove advanced transform by default for mobile. 
+         We'll add it in a special media query for desktops. */
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
     .option h3 {
       font-size: 18px;
@@ -173,12 +169,7 @@
       justify-content: center;
       z-index: 1000;
       background-color: rgba(0, 0, 0, 0.6);
-      /* Fade-in animation for modal background */
-      animation: modalFadeIn 0.5s forwards;
-      opacity: 0; /* Start invisible, use JS to show */
-    }
-    @keyframes modalFadeIn {
-      to { opacity: 1; }
+      /* We'll rely on JS to set display: flex, so no fade-in trap. */
     }
     .modal-content {
       position: relative;
@@ -191,15 +182,7 @@
       max-width: 500px;
       padding: 30px;
       text-align: center;
-      animation: slideUp 0.5s ease forwards;
-      transform: translateY(50px);
-      opacity: 0;
-    }
-    @keyframes slideUp {
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+      /* Simple approach: show it immediately when .modal is displayed. */
     }
     .modal-content h2 {
       font-size: 24px;
@@ -241,6 +224,17 @@
     }
 
     /***************************************************************
+      DESKTOP-ONLY HOVER & ANIMATIONS
+      We'll only apply the 3D hover effect if the device can hover.
+    ***************************************************************/
+    @media (hover: hover) and (pointer: fine) {
+      .option:hover {
+        transform: perspective(600px) rotateX(5deg) scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    /***************************************************************
       RESPONSIVE
     ***************************************************************/
     @media (max-width: 768px) {
@@ -252,8 +246,9 @@
         width: 100%;
         max-width: 320px;
       }
-      .modal-content {
-        max-width: 90%;
+      /* Disable floating animation on smaller screens */
+      .container {
+        animation: none;
       }
     }
   </style>
@@ -267,25 +262,21 @@
     <div class="service-section">
       <div class="service-title">Netflix Plans</div>
       <div class="options">
-        <!-- 2 Months -->
         <div class="option" onclick="showPaymentOptions('Netflix','2 Months')">
           <h3>2 Months</h3>
           <div class="price">45,000 UGX</div>
           <button>Pay Now</button>
         </div>
-        <!-- 3 Months -->
         <div class="option" onclick="showPaymentOptions('Netflix','3 Months')">
           <h3>3 Months</h3>
           <div class="price">60,000 UGX</div>
           <button>Pay Now</button>
         </div>
-        <!-- 6 Months -->
         <div class="option" onclick="showPaymentOptions('Netflix','6 Months')">
           <h3>6 Months</h3>
           <div class="price">120,000 UGX</div>
           <button>Pay Now</button>
         </div>
-        <!-- 1 Year -->
         <div class="option" onclick="showPaymentOptions('Netflix','1 Year')">
           <h3>1 Year</h3>
           <div class="price">240,000 UGX</div>
@@ -298,19 +289,16 @@
     <div class="service-section">
       <div class="service-title">Spotify Plans</div>
       <div class="options">
-        <!-- 3 Months -->
         <div class="option" onclick="showPaymentOptions('Spotify','3 Months')">
           <h3>3 Months</h3>
           <div class="price">30,000 UGX</div>
           <button>Pay Now</button>
         </div>
-        <!-- 6 Months -->
         <div class="option" onclick="showPaymentOptions('Spotify','6 Months')">
           <h3>6 Months</h3>
           <div class="price">60,000 UGX</div>
           <button>Pay Now</button>
         </div>
-        <!-- 1 Year -->
         <div class="option" onclick="showPaymentOptions('Spotify','1 Year')">
           <h3>1 Year</h3>
           <div class="price">120,000 UGX</div>
@@ -331,42 +319,41 @@
         <li><strong>Airtel:</strong> 0744688623 (Alfred)</li>
       </ul>
       <p>Once you've sent the payment, click the "Confirm Payment" button to notify us.</p>
-      <!-- This button will dynamically redirect to the correct WhatsApp message -->
       <button id="confirmBtn">Confirm Payment</button>
     </div>
   </div>
 
   <script>
-    // This function is called when a plan is selected
-    // 'service' is either 'Netflix' or 'Spotify'
-    // 'plan' is something like '2 Months', '3 Months', etc.
+    /***************************************************************
+     SHOW PAYMENT OPTIONS
+     - Displays the modal
+     - Dynamically sets the WhatsApp message (#Service Plan payment completed)
+     - Uses phone number +256744688623
+    ***************************************************************/
     function showPaymentOptions(service, plan) {
-      // Show the modal
       const modal = document.getElementById('paymentModal');
       modal.style.display = 'flex';
 
       // Build the custom WhatsApp message
-      // Example: "#Netflix 2 Months payment completed"
       const customMessage = `#${service} ${plan} payment completed`;
-
-      // Encode the message for use in the WhatsApp URL
       const encodedMessage = encodeURIComponent(customMessage);
-
-      // Replace +256744688623 as requested
       const whatsappNumber = '256744688623';
 
-      // Set the Confirm Payment button's click action
       document.getElementById('confirmBtn').onclick = function() {
         window.open(`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`, '_blank');
       };
     }
 
-    // Close modal
+    /***************************************************************
+     CLOSE MODAL
+    ***************************************************************/
     function closeModal() {
       document.getElementById('paymentModal').style.display = 'none';
     }
 
-    // Close modal on click outside
+    /***************************************************************
+     CLOSE MODAL ON CLICK OUTSIDE
+    ***************************************************************/
     window.onclick = function(event) {
       const modal = document.getElementById('paymentModal');
       if (event.target === modal) {
