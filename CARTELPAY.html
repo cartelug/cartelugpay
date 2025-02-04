@@ -12,9 +12,9 @@
   />
 
   <style>
-    /***************************************************************
+    /************************************************
       RESET & GLOBAL STYLES
-    ***************************************************************/
+    *************************************************/
     * {
       box-sizing: border-box;
       margin: 0;
@@ -24,219 +24,178 @@
       width: 100%;
       height: 100%;
       font-family: 'Montserrat', sans-serif;
-      color: #ffffff;
+      color: #333;
     }
     body {
-      /* Purple-to-Orange Gradient Background */
+      /* Simple Purple-to-Orange Gradient Background */
       background: linear-gradient(45deg, #6C00FF 0%, #FF7A00 100%);
-      background-attachment: fixed;
       background-size: cover;
+      background-attachment: fixed;
       display: flex;
-      align-items: center;
       justify-content: center;
-      /* Directly set opacity to 1 (no fadeIn trap for older mobiles) */
-      opacity: 1;
+      align-items: flex-start; /* Let content scroll on tall screens */
+      padding: 20px 0;
+      overflow-x: hidden;
     }
 
-    /***************************************************************
+    /************************************************
       CONTAINER
-    ***************************************************************/
+    *************************************************/
     .container {
-      position: relative;
-      max-width: 800px;
-      width: 90%;
-      margin: 40px auto;
-      
-      /* Glassmorphic styling with fallback */
-      background-color: rgba(255, 255, 255, 0.2); /* fallback if backdrop-filter not supported */
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      padding: 40px 30px;
+      width: 95%;
+      max-width: 700px;
+      background: #fff; /* High contrast so text is always visible */
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 30px 20px;
+      margin: 20px;
       text-align: center;
-      
-      /* Subtle floating animation on desktop only */
-      animation: floatContainer 6s ease-in-out infinite;
-    }
-    @keyframes floatContainer {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
     }
 
-    /***************************************************************
-      HEADINGS
-    ***************************************************************/
     h1 {
       font-weight: 600;
-      font-size: 2rem;
+      font-size: 1.8rem;
       margin-bottom: 20px;
-      /* Slight gradient text effect for the main title */
-      background: linear-gradient(45deg, #c884ff, #ffc484);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #333; /* Ensure good readability */
+    }
+    .service-section {
+      margin: 30px 0;
     }
     .service-title {
       font-size: 1.25rem;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       font-weight: 600;
-      color: #eaeaea;
+      color: #444;
       position: relative;
       display: inline-block;
     }
-    /* A small decorative underline effect for sub-headings */
     .service-title::after {
       content: "";
       display: block;
       width: 50%;
       height: 2px;
-      background: #fff;
+      background: #666;
       margin: 8px auto 0;
       opacity: 0.7;
     }
 
-    /***************************************************************
-      OPTIONS / CARDS
-    ***************************************************************/
+    /************************************************
+      OPTIONS / PLAN CARDS
+    *************************************************/
     .options {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
+      margin-top: 20px;
     }
     .option {
-      position: relative;
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: #f9f9f9;
+      border: 2px solid #eee;
+      border-radius: 8px;
       width: 180px;
       padding: 20px;
       cursor: pointer;
-      overflow: hidden;
-      /* We remove advanced transform by default for mobile. 
-         We'll add it in a special media query for desktops. */
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .option:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
     .option h3 {
-      font-size: 18px;
+      font-size: 16px;
       margin-bottom: 10px;
       font-weight: 600;
-      color: #fff;
+      color: #333;
     }
     .price {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 700;
-      margin-bottom: 15px;
-      /* Light color with a slight text shadow */
-      color: #fff;
-      text-shadow: 0 0 6px rgba(255,255,255,0.2);
+      margin-bottom: 10px;
+      color: #444;
     }
 
-    /***************************************************************
+    /************************************************
       BUTTONS
-    ***************************************************************/
-    /* Attractive but not-too-bright green color */
+    *************************************************/
     button {
-      background-color: #2ecc71;
-      color: #ffffff;
-      padding: 12px 25px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 25px;
-      font-size: 15px;
+      background-color: #2ecc71; /* Green */
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      outline: none;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
     }
     button:hover {
       background-color: #27ae60;
-      transform: translateY(-2px);
     }
 
-    /***************************************************************
+    /************************************************
       MODAL
-    ***************************************************************/
+    *************************************************/
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
       background-color: rgba(0, 0, 0, 0.6);
-      /* We'll rely on JS to set display: flex, so no fade-in trap. */
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
     }
     .modal-content {
-      position: relative;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 15px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-      width: 90%;
+      background: #fff;
+      width: 100%;
       max-width: 500px;
-      padding: 30px;
+      padding: 20px;
+      border-radius: 8px;
+      position: relative;
       text-align: center;
-      /* Simple approach: show it immediately when .modal is displayed. */
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      color: #333; /* Make sure text is visible on white background */
     }
     .modal-content h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      font-weight: 700;
-      color: #fff;
-      text-shadow: 0 0 4px rgba(255,255,255,0.3);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #333;
     }
     .modal-content p {
-      color: #eee;
-      font-size: 16px;
-      margin-bottom: 20px;
-      line-height: 1.6;
+      margin-bottom: 15px;
+      color: #555;
     }
     .modal-content ul {
       text-align: left;
-      margin: 10px 0;
+      margin: 10px 0 20px;
       padding-left: 20px;
-      color: #fefefe;
-      font-size: 18px; /* Increase the font size for readability */
-      font-weight: 600; /* Make it bold to stand out */
+      font-size: 16px;
+      color: #333;
+      font-weight: 600;
     }
     .modal-content li {
-      margin: 8px 0;
+      margin: 6px 0;
     }
     .close-btn {
       position: absolute;
-      top: 10px; right: 15px;
+      top: 10px; 
+      right: 10px;
       font-size: 20px;
-      cursor: pointer;
-      color: #fff;
+      color: #999;
       background: none;
       border: none;
-      outline: none;
-      transition: transform 0.3s ease;
+      cursor: pointer;
     }
     .close-btn:hover {
-      transform: scale(1.2);
+      color: #555;
     }
 
-    /***************************************************************
-      DESKTOP-ONLY HOVER & ANIMATIONS
-      We'll only apply the 3D hover effect if the device can hover.
-    ***************************************************************/
-    @media (hover: hover) and (pointer: fine) {
-      .option:hover {
-        transform: perspective(600px) rotateX(5deg) scale(1.05);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-      }
-    }
-
-    /***************************************************************
+    /************************************************
       RESPONSIVE
-    ***************************************************************/
+    *************************************************/
     @media (max-width: 768px) {
       .options {
         flex-direction: column;
@@ -246,11 +205,8 @@
         width: 100%;
         max-width: 320px;
       }
-      /* Disable floating animation on smaller screens */
-      .container {
-        animation: none;
-      }
     }
+
   </style>
 </head>
 <body>
@@ -324,36 +280,38 @@
   </div>
 
   <script>
-    /***************************************************************
-     SHOW PAYMENT OPTIONS
-     - Displays the modal
-     - Dynamically sets the WhatsApp message (#Service Plan payment completed)
-     - Uses phone number +256744688623
-    ***************************************************************/
+    /************************************************
+      SHOW PAYMENT OPTIONS
+      - Displays the modal
+      - Dynamically sets the WhatsApp message (#Service Plan payment completed)
+      - Uses phone number +256744688623
+    *************************************************/
     function showPaymentOptions(service, plan) {
       const modal = document.getElementById('paymentModal');
-      modal.style.display = 'flex';
-
-      // Build the custom WhatsApp message
+      modal.style.display = 'flex'; // show the modal
       const customMessage = `#${service} ${plan} payment completed`;
       const encodedMessage = encodeURIComponent(customMessage);
       const whatsappNumber = '256744688623';
 
+      // When user clicks "Confirm Payment"
       document.getElementById('confirmBtn').onclick = function() {
-        window.open(`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`, '_blank');
+        window.open(
+          `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`,
+          '_blank'
+        );
       };
     }
 
-    /***************************************************************
-     CLOSE MODAL
-    ***************************************************************/
+    /************************************************
+      CLOSE MODAL
+    *************************************************/
     function closeModal() {
       document.getElementById('paymentModal').style.display = 'none';
     }
 
-    /***************************************************************
-     CLOSE MODAL ON CLICK OUTSIDE
-    ***************************************************************/
+    /************************************************
+      CLICK OUTSIDE MODAL CLOSE
+    *************************************************/
     window.onclick = function(event) {
       const modal = document.getElementById('paymentModal');
       if (event.target === modal) {
