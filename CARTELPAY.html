@@ -81,10 +81,12 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
-    .landing-section .option h3 {
-      font-size: 20px;
-      font-weight: 600;
-      color: #333;
+    .logo {
+      display: block;
+      width: 120px;
+      max-width: 100%;
+      margin: 0 auto;
+      height: auto;
     }
 
     /************************************************
@@ -264,10 +266,20 @@
       <h1>Choose a Subscription Service</h1>
       <div class="options">
         <div class="option" onclick="showNetflix()">
-          <h3>Netflix</h3>
+          <!-- Netflix Logo (transparent SVG) -->
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+            alt="Netflix"
+            class="logo"
+          />
         </div>
         <div class="option" onclick="showSpotify()">
-          <h3>Spotify</h3>
+          <!-- Spotify Logo (transparent SVG) -->
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
+            alt="Spotify"
+            class="logo"
+          />
         </div>
       </div>
     </div>
@@ -347,22 +359,24 @@
   </div>
 
   <script>
-    /* Hide Netflix & Spotify sections by default; only show them if needed */
+    // Hide Netflix & Spotify sections by default
     document.getElementById('netflixSection').style.display = 'none';
     document.getElementById('spotifySection').style.display = 'none';
 
     function showNetflix() {
-      // Hide landing, show netflix
+      // Hide landing, show Netflix
       document.getElementById('landingSection').style.display = 'none';
       document.getElementById('netflixSection').style.display = 'block';
       document.getElementById('spotifySection').style.display = 'none';
     }
+
     function showSpotify() {
-      // Hide landing, show spotify
+      // Hide landing, show Spotify
       document.getElementById('landingSection').style.display = 'none';
       document.getElementById('spotifySection').style.display = 'block';
       document.getElementById('netflixSection').style.display = 'none';
     }
+
     function goBackToLanding() {
       // Show landing, hide both services
       document.getElementById('landingSection').style.display = 'block';
@@ -370,17 +384,15 @@
       document.getElementById('spotifySection').style.display = 'none';
     }
 
-    /************************************************
-     SHOW PAYMENT OPTIONS (Modal + WhatsApp message)
-    *************************************************/
+    // Show Payment Modal + dynamic WhatsApp link
     function showPaymentOptions(service, plan) {
       const modal = document.getElementById('paymentModal');
       modal.style.display = 'flex'; // show the modal
+
       const customMessage = `#${service} ${plan} payment completed`;
       const encodedMessage = encodeURIComponent(customMessage);
       const whatsappNumber = '256744688623';
 
-      // Confirm Payment => redirect to WhatsApp
       document.getElementById('confirmBtn').onclick = function() {
         window.open(
           `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`,
@@ -389,16 +401,12 @@
       };
     }
 
-    /************************************************
-      CLOSE MODAL
-    *************************************************/
+    // Close modal
     function closeModal() {
       document.getElementById('paymentModal').style.display = 'none';
     }
 
-    /************************************************
-      CLICK OUTSIDE MODAL TO CLOSE
-    *************************************************/
+    // Close modal if user clicks outside it
     window.onclick = function(event) {
       const modal = document.getElementById('paymentModal');
       if (event.target === modal) {
