@@ -13,7 +13,7 @@
 
   <style>
     /************************************************
-      RESET & GLOBAL STYLES
+      RESET & GLOBAL
     *************************************************/
     * {
       box-sizing: border-box;
@@ -25,17 +25,17 @@
       height: 100%;
       font-family: 'Montserrat', sans-serif;
       color: #333;
+      overflow-x: hidden;
     }
     body {
-      /* Simple Purple-to-Orange Gradient Background */
-      background: linear-gradient(45deg, #6C00FF 0%, #FF7A00 100%);
+      /* Gradient background */
+      background: linear-gradient(45deg, #6C00FF, #FF7A00);
       background-size: cover;
       background-attachment: fixed;
       display: flex;
+      align-items: flex-start;
       justify-content: center;
-      align-items: flex-start; /* Let content scroll on tall screens */
-      padding: 20px 0;
-      overflow-x: hidden;
+      padding: 20px;
     }
 
     /************************************************
@@ -44,11 +44,10 @@
     .container {
       width: 95%;
       max-width: 700px;
-      background: #fff; /* High contrast so text is always visible */
+      background: #fff; /* High contrast for clarity */
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       padding: 30px 20px;
-      margin: 20px;
       text-align: center;
     }
 
@@ -56,8 +55,41 @@
       font-weight: 600;
       font-size: 1.8rem;
       margin-bottom: 20px;
-      color: #333; /* Ensure good readability */
+      color: #333;
     }
+
+    /************************************************
+      LANDING SECTION (Choose Netflix or Spotify)
+    *************************************************/
+    .landing-section .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .landing-section .option {
+      background: #f5f5f5;
+      border: 2px solid #eee;
+      border-radius: 8px;
+      width: 200px;
+      padding: 40px 20px;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .landing-section .option:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .landing-section .option h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /************************************************
+      SERVICE SECTIONS (Netflix / Spotify)
+    *************************************************/
     .service-section {
       margin: 30px 0;
     }
@@ -78,10 +110,6 @@
       margin: 8px auto 0;
       opacity: 0.7;
     }
-
-    /************************************************
-      OPTIONS / PLAN CARDS
-    *************************************************/
     .options {
       display: flex;
       flex-wrap: wrap;
@@ -89,7 +117,7 @@
       justify-content: center;
       margin-top: 20px;
     }
-    .option {
+    .option-card {
       background: #f9f9f9;
       border: 2px solid #eee;
       border-radius: 8px;
@@ -98,11 +126,11 @@
       cursor: pointer;
       transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
-    .option:hover {
-      transform: translateY(-5px);
+    .option-card:hover {
+      transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
-    .option h3 {
+    .option-card h3 {
       font-size: 16px;
       margin-bottom: 10px;
       font-weight: 600;
@@ -115,9 +143,6 @@
       color: #444;
     }
 
-    /************************************************
-      BUTTONS
-    *************************************************/
     button {
       background-color: #2ecc71; /* Green */
       color: #fff;
@@ -132,6 +157,22 @@
     }
     button:hover {
       background-color: #27ae60;
+    }
+
+    /* Hide Netflix & Spotify sections initially */
+    #netflixSection, 
+    #spotifySection {
+      display: none;
+    }
+
+    /* "Back" button to return to landing section */
+    .back-btn {
+      margin-top: 30px;
+      background-color: #ccc;
+      color: #333;
+    }
+    .back-btn:hover {
+      background-color: #bbb;
     }
 
     /************************************************
@@ -157,12 +198,11 @@
       position: relative;
       text-align: center;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      color: #333; /* Make sure text is visible on white background */
+      color: #333;
     }
     .modal-content h2 {
       font-size: 1.5rem;
       margin-bottom: 15px;
-      color: #333;
     }
     .modal-content p {
       margin-bottom: 15px;
@@ -173,8 +213,8 @@
       margin: 10px 0 20px;
       padding-left: 20px;
       font-size: 16px;
-      color: #333;
       font-weight: 600;
+      color: #333;
     }
     .modal-content li {
       margin: 6px 0;
@@ -197,74 +237,101 @@
       RESPONSIVE
     *************************************************/
     @media (max-width: 768px) {
+      .landing-section .options {
+        flex-direction: column;
+      }
+      .landing-section .option {
+        width: 100%;
+        max-width: 320px;
+      }
       .options {
         flex-direction: column;
         align-items: center;
       }
-      .option {
+      .option-card {
         width: 100%;
         max-width: 320px;
       }
     }
-
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>CartelUG Subscription Payment</h1>
-
-    <!-- Netflix Plans -->
-    <div class="service-section">
-      <div class="service-title">Netflix Plans</div>
+    
+    <!-- LANDING SECTION: 2 big options (Netflix / Spotify) -->
+    <div class="landing-section" id="landingSection">
+      <h1>Choose a Subscription Service</h1>
       <div class="options">
-        <div class="option" onclick="showPaymentOptions('Netflix','2 Months')">
-          <h3>2 Months</h3>
-          <div class="price">45,000 UGX</div>
-          <button>Pay Now</button>
+        <div class="option" onclick="showNetflix()">
+          <h3>Netflix</h3>
         </div>
-        <div class="option" onclick="showPaymentOptions('Netflix','3 Months')">
-          <h3>3 Months</h3>
-          <div class="price">60,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-        <div class="option" onclick="showPaymentOptions('Netflix','6 Months')">
-          <h3>6 Months</h3>
-          <div class="price">120,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-        <div class="option" onclick="showPaymentOptions('Netflix','1 Year')">
-          <h3>1 Year</h3>
-          <div class="price">240,000 UGX</div>
-          <button>Pay Now</button>
+        <div class="option" onclick="showSpotify()">
+          <h3>Spotify</h3>
         </div>
       </div>
     </div>
 
-    <!-- Spotify Plans -->
-    <div class="service-section">
-      <div class="service-title">Spotify Plans</div>
-      <div class="options">
-        <div class="option" onclick="showPaymentOptions('Spotify','3 Months')">
-          <h3>3 Months</h3>
-          <div class="price">30,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-        <div class="option" onclick="showPaymentOptions('Spotify','6 Months')">
-          <h3>6 Months</h3>
-          <div class="price">60,000 UGX</div>
-          <button>Pay Now</button>
-        </div>
-        <div class="option" onclick="showPaymentOptions('Spotify','1 Year')">
-          <h3>1 Year</h3>
-          <div class="price">120,000 UGX</div>
-          <button>Pay Now</button>
+    <!-- NETFLIX SECTION -->
+    <div id="netflixSection">
+      <div class="service-section">
+        <div class="service-title">Netflix Plans</div>
+        <div class="options">
+          <div class="option-card" onclick="showPaymentOptions('Netflix','2 Months')">
+            <h3>2 Months</h3>
+            <div class="price">45,000 UGX</div>
+            <button>Pay Now</button>
+          </div>
+          <div class="option-card" onclick="showPaymentOptions('Netflix','3 Months')">
+            <h3>3 Months</h3>
+            <div class="price">60,000 UGX</div>
+            <button>Pay Now</button>
+          </div>
+          <div class="option-card" onclick="showPaymentOptions('Netflix','6 Months')">
+            <h3>6 Months</h3>
+            <div class="price">120,000 UGX</div>
+            <button>Pay Now</button>
+          </div>
+          <div class="option-card" onclick="showPaymentOptions('Netflix','1 Year')">
+            <h3>1 Year</h3>
+            <div class="price">240,000 UGX</div>
+            <button>Pay Now</button>
+          </div>
         </div>
       </div>
+      <!-- "Back" button to go to landing section -->
+      <button class="back-btn" onclick="goBackToLanding()">Back</button>
     </div>
+
+    <!-- SPOTIFY SECTION -->
+    <div id="spotifySection">
+      <div class="service-section">
+        <div class="service-title">Spotify Plans</div>
+        <div class="options">
+          <div class="option-card" onclick="showPaymentOptions('Spotify','3 Months')">
+            <h3>3 Months</h3>
+            <div class="price">30,000 UGX</div>
+            <button>Pay Now</button>
+          </div>
+          <div class="option-card" onclick="showPaymentOptions('Spotify','6 Months')">
+            <h3>6 Months</h3>
+            <div class="price">60,000 UGX</div>
+            <button>Pay Now</button>
+          </div>
+          <div class="option-card" onclick="showPaymentOptions('Spotify','1 Year')">
+            <h3>1 Year</h3>
+            <div class="price">120,000 UGX</div>
+            <button>Pay Now</button>
+          </div>
+        </div>
+      </div>
+      <!-- "Back" button to go to landing section -->
+      <button class="back-btn" onclick="goBackToLanding()">Back</button>
+    </div>
+
   </div>
 
-  <!-- Payment Modal -->
+  <!-- PAYMENT MODAL -->
   <div id="paymentModal" class="modal">
     <div class="modal-content">
       <button class="close-btn" onclick="closeModal()">&times;</button>
@@ -280,11 +347,31 @@
   </div>
 
   <script>
+    /* Hide Netflix & Spotify sections by default; only show them if needed */
+    document.getElementById('netflixSection').style.display = 'none';
+    document.getElementById('spotifySection').style.display = 'none';
+
+    function showNetflix() {
+      // Hide landing, show netflix
+      document.getElementById('landingSection').style.display = 'none';
+      document.getElementById('netflixSection').style.display = 'block';
+      document.getElementById('spotifySection').style.display = 'none';
+    }
+    function showSpotify() {
+      // Hide landing, show spotify
+      document.getElementById('landingSection').style.display = 'none';
+      document.getElementById('spotifySection').style.display = 'block';
+      document.getElementById('netflixSection').style.display = 'none';
+    }
+    function goBackToLanding() {
+      // Show landing, hide both services
+      document.getElementById('landingSection').style.display = 'block';
+      document.getElementById('netflixSection').style.display = 'none';
+      document.getElementById('spotifySection').style.display = 'none';
+    }
+
     /************************************************
-      SHOW PAYMENT OPTIONS
-      - Displays the modal
-      - Dynamically sets the WhatsApp message (#Service Plan payment completed)
-      - Uses phone number +256744688623
+     SHOW PAYMENT OPTIONS (Modal + WhatsApp message)
     *************************************************/
     function showPaymentOptions(service, plan) {
       const modal = document.getElementById('paymentModal');
@@ -293,7 +380,7 @@
       const encodedMessage = encodeURIComponent(customMessage);
       const whatsappNumber = '256744688623';
 
-      // When user clicks "Confirm Payment"
+      // Confirm Payment => redirect to WhatsApp
       document.getElementById('confirmBtn').onclick = function() {
         window.open(
           `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`,
@@ -310,7 +397,7 @@
     }
 
     /************************************************
-      CLICK OUTSIDE MODAL CLOSE
+      CLICK OUTSIDE MODAL TO CLOSE
     *************************************************/
     window.onclick = function(event) {
       const modal = document.getElementById('paymentModal');
